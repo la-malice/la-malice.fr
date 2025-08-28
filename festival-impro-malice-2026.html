@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Festival Impro à la Barre — 15–17 mai 2026 · Anglet</title>
+<meta name="description" content="Festival international d’impro : 3 soirées à Anglet, matchs vs Suisse, Équipe de France et Belgique, formats longs de La Malice, ≈10 ateliers, soirée festive.">
+<link rel="icon" href="festival-2026/favicon.png">
+<style>
+  :root{--bg:#0A1428;--bg2:#0E1D3B;--accent:#FF3B82;--blue:#36D6F0;--text:#E8F1FF;--muted:#9FB3D1;--card:#0f203f;--hero-image: url("festival-2026/hero-collage-1920x1080.png");--hero-image-desktop: var(--hero-image)}
+  *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;line-height:1.5}
+  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+  img{max-width:100%;height:auto;display:block}
+  .container{width:min(1120px,100%);margin-inline:auto;padding:0 16px}
+  .section{padding:56px 0}
+  .small{font-size:.9rem;color:var(--muted)}
+  .btn{display:inline-block;padding:.95rem 1.25rem;border-radius:999px;font-weight:800;border:2px solid transparent}
+  .btn-primary{background:var(--accent);color:#061021}.btn-primary:hover{filter:brightness(1.05)}
+  .btn-secondary{background:transparent;border-color:var(--blue);color:var(--blue)}
+  .card{background:var(--card);border:1px solid #142a55;border-radius:16px;padding:18px}
+  .grid{display:grid;gap:16px}.grid-2{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}
+  @media(min-width:800px){.grid-2{grid-template-columns:1.2fr .8fr}.grid-3{grid-template-columns:repeat(3,1fr)}}
+
+  /* Header (révélé au scroll) */
+  header.site{position:fixed;inset-inline:0;top:0;z-index:40;background:rgba(10,20,40,.72);backdrop-filter:saturate(160%) blur(6px);border-bottom:1px solid #112244;transform:translateY(-100%);transition:transform .35s}
+  header.site.show{transform:translateY(0)}
+  header .bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+  .brand{font-weight:800}
+  nav.primary{display:none;gap:18px}
+  .burger{display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+  .burger span{width:22px;height:2px;background:#cfe1ff;border-radius:2px;box-shadow:0 6px 0 #cfe1ff,0 -6px 0 #cfe1ff}
+  .drawer{position:fixed;top:0;right:0;width:min(92vw,360px);height:100vh;background:#0b1c3a;border-left:1px solid #153264;transform:translateX(100%);transition:transform .3s;z-index:50;padding:16px}
+  .drawer.open{transform:translateX(0)} .drawer a{display:block;padding:14px 6px;border-bottom:1px solid #173c75}
+  @media(min-width:900px){.burger{display:none} nav.primary{display:flex}}
+
+  /* Hero (image en background, CTAs par-dessus) */
+  .hero{
+    position:relative;min-height:72vh;display:grid;place-items:end start;padding:24px 0 48px;
+    background:
+      linear-gradient(180deg, rgba(14,29,59,.35) 0%, rgba(10,20,40,.85) 100%),
+      var(--hero-image) center bottom/cover no-repeat;
+    border-bottom:1px solid #12254a;
+  }
+  .hero .cta-wrap{width:100%}
+  .hero .cta-card{display:inline-flex;gap:12px;flex-wrap:wrap;align-items:center;background:rgba(8,18,37,.7);border:1px solid #173363;border-radius:16px;padding:12px}
+  .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+  /* Valeur & headliners */
+  .headline{font-size:clamp(1.4rem,2.6vw,2rem);font-weight:900;margin:0 0 8px}
+  .pill{display:inline-block;border:1px solid #183468;background:#0b1c3a;color:#cfe1ff;border-radius:999px;padding:.45rem .75rem;font-weight:700}
+  .stars{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+  .star{display:flex;gap:12px;align-items:center;background:#0b1c3a;border:1px solid #183468;border-radius:14px;padding:10px 12px}
+
+  /* Chiffres */
+  .stats{display:grid;gap:16px}
+  @media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr)}}
+  .stat{border:1px solid #173363;background:#0b1c3a;border-radius:16px;padding:18px;text-align:center}
+  .stat .num{font-weight:900;font-size:2rem;color:var(--accent);display:block}
+
+  /* Programme / Ateliers / Sponsors */
+  .program .day{display:grid;gap:12px}
+  .slot{display:grid;gap:6px;border-left:3px solid var(--accent);padding-left:12px}
+  .slot .time{font-weight:700}
+  .slot .meta{color:var(--muted);font-size:.92rem}
+  .highlight{border-color:var(--blue)}
+  .pricing{display:grid;gap:18px}@media(min-width:720px){.pricing{grid-template-columns:repeat(3,1fr)}}
+  .price{background:var(--card);border:1px solid #14305c;border-radius:16px;padding:18px}
+  .price .value{font-weight:900;font-size:1.8rem;color:var(--accent)}
+  .sponsors-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(min-width:720px){.sponsors-list{grid-template-columns:repeat(6,1fr)}}
+  .sponsor{background:#0b1c3a;border:1px dashed #284d8c;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#6fa3ff;font-weight:700}
+
+  footer{border-top:1px solid #132a55;background:#081225}
+  .footer-grid{display:grid;gap:18px}@media(min-width:800px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+
+  /* Sticky CTA mobile */
+  .sticky-cta{position:fixed;bottom:12px;left:0;right:0;display:flex;justify-content:center;z-index:45}
+  .sticky-cta .btn{box-shadow:0 10px 30px rgba(255,59,130,.25)}
+  @media(min-width:840px){.sticky-cta{display:none}}
+
+  /* Hero desktop: plein écran en background, CTA compact. Permet un visuel dédié desktop */
+  @media(min-width:1024px){
+    .hero{min-height:auto;aspect-ratio:16/9;background:
+      linear-gradient(180deg, rgba(14,29,59,.35) 0%, rgba(10,20,40,.85) 100%),
+      var(--hero-image-desktop) center bottom/cover no-repeat}
+    .hero .cta-wrap{width:auto}
+  }
+
+  /* Modal */
+  dialog{border:none;border-radius:18px;padding:0;max-width:520px;width:92%}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .modal-card{background:var(--card);border:1px solid #173363;border-radius:18px;padding:18px}
+  label{display:block;margin:.6rem 0 .2rem}
+  input{font:inherit;border-radius:10px;border:1px solid #25477f;background:#09152b;color:var(--text);padding:.7rem .8rem;width:100%}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- Header (apparition au scroll) -->
+<header class="site" id="siteHeader" aria-label="Navigation principale">
+  <div class="bar">
+    <div class="brand">Festival Impro à la Barre</div>
+    <nav class="primary">
+      <a href="#valeur">À l’affiche</a>
+      <a href="#chiffres">Les chiffres</a>
+      <a href="#programme">Programme</a>
+      <a href="#ateliers">Ateliers</a>
+      <a href="#infos">Infos pratiques</a>
+      <a href="#sponsors">Partenaires</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu"><span></span></button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" aria-label="Menu mobile">
+  <a href="#valeur">À l’affiche</a>
+  <a href="#chiffres">Les chiffres</a>
+  <a href="#programme">Programme</a>
+  <a href="#ateliers">Ateliers</a>
+  <a href="#infos">Infos pratiques</a>
+  <a href="#sponsors">Partenaires</a>
+  <a href="#" data-open="notify" style="margin-top:8px">Prévenez-moi</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <h1 class="sr-only">Festival Impro à la Barre — 15–17 mai 2026 · Anglet</h1>
+  <div class="container cta-wrap">
+    <div class="cta-card">
+      <button class="btn btn-primary" data-open="notify">Prévenez-moi</button>
+      <a class="btn btn-secondary" href="#programme">Découvrir le programme</a>
+    </div>
+    <p class="small" style="margin-top:10px">Billetterie HelloAsso à venir. Recevez une alerte dès l’ouverture.</p>
+  </div>
+</section>
+
+<!-- Proposition de valeur -->
+<section id="valeur" class="section">
+  <div class="container">
+    <p class="pill">Festival international</p>
+    <h2 class="headline">Trois soirées d’impro de haut niveau — <span style="color:var(--accent)">Suisse</span>, <span style="color:var(--accent)">Équipe de France</span> & <span style="color:var(--accent)">Belgique</span></h2>
+    <p class="small">Des matchs d’exception face à des équipes invitées internationales, précédés chaque soir d’un format long créé par <strong>La Malice</strong>.</p>
+
+    <!-- DESIGNER : 3 visuels headliners
+         - 800x450 (1200x675 rétina)
+         - Photo réaliste détourée ou collage charte
+         - Énergie, cohérence visuelle -->
+    <div class="stars" style="margin-top:14px">
+      <div class="star">
+        <img src="festival-2026/headliners/suisse-800x450.jpg" alt="Équipe de Suisse" width="160" height="90">
+        <div><strong>Équipe de Suisse</strong><br><span class="small">Match du vendredi</span></div>
+      </div>
+      <div class="star">
+        <img src="festival-2026/headliners/equipe-france-800x450.jpg" alt="Équipe de France d’Improvisation" width="160" height="90">
+        <div><strong>Équipe de France d’Improvisation</strong><br><span class="small">Invitée d’honneur — samedi soir</span></div>
+      </div>
+      <div class="star">
+        <img src="festival-2026/headliners/belgique-800x450.jpg" alt="Équipe de Belgique" width="160" height="90">
+        <div><strong>Équipe de Belgique</strong><br><span class="small">Match du dimanche</span></div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">Visuels des artistes et des équipes à venir.</p>
+  </div>
+</section>
+
+<!-- Les chiffres -->
+<section id="chiffres" class="section" aria-labelledby="stats-title">
+  <div class="container">
+    <h2 id="stats-title">Les chiffres</h2>
+    <div class="stats" style="margin-top:14px">
+      <div class="stat"><span class="num">2</span>spectacles / soir</div>
+      <div class="stat"><span class="num">≈ 10</span>ateliers</div>
+      <div class="stat"><span class="num">1</span>soirée festive (samedi)</div>
+    </div>
+  </div>
+</section>
+
+<!-- Programme -->
+<section id="programme" class="section program">
+  <div class="container">
+    <h2>Programme</h2>
+    <p class="small">Chaque journée alterne des <strong>stages d’impro</strong> (matin & après-midi) et une <strong>soirée</strong> en deux temps : <em>format long</em> puis <em>match international</em>.</p>
+
+    <div class="grid grid-3" style="margin-top:18px">
+      <!-- Vendredi -->
+      <div class="day card">
+        <h3>Vendredi 15 mai</h3>
+        <div class="slot">
+          <div class="time">09:30</div>
+          <div class="meta">Accueil des participants aux stages</div>
+        </div>
+        <div class="slot">
+          <div class="time">10:00–13:00</div>
+          <div class="meta">Stages du matin — <strong>2 salles</strong></div>
+        </div>
+        <div class="slot">
+          <div class="time">14:00–17:00</div>
+          <div class="meta">Stages de l’après-midi — <strong>2 salles</strong></div>
+        </div>
+        <div class="slot">
+          <div class="time">18:30</div>
+          <div class="meta">Ambiance musicale · Installation du public</div>
+        </div>
+        <div class="slot">
+          <div class="time">19:00</div>
+          <h4>Format long — La Malice</h4>
+          <div class="meta">~70 min</div>
+        </div>
+        <div class="slot">
+          <div class="time">20:00</div>
+          <div class="meta">Pause</div>
+        </div>
+        <div class="slot highlight">
+          <div class="time">20:30</div>
+          <h4>Match — Malice vs Suisse</h4>
+          <div class="meta">~75 min</div>
+        </div>
+        <div class="slot">
+          <div class="time">23:00</div>
+          <div class="meta">Fermeture</div>
+        </div>
+      </div>
+
+      <!-- Samedi -->
+      <div class="day card">
+        <h3>Samedi 16 mai</h3>
+        <div class="slot"><div class="time">09:30</div><div class="meta">Accueil des participants aux stages</div></div>
+        <div class="slot"><div class="time">10:00–13:00</div><div class="meta">Stages du matin — <strong>2 salles</strong></div></div>
+        <div class="slot"><div class="time">14:00–17:00</div><div class="meta">Stages de l’après-midi — <strong>2 salles</strong></div></div>
+        <div class="slot"><div class="time">18:30</div><div class="meta">Ambiance musicale · Installation du public</div></div>
+        <div class="slot"><div class="time">19:00</div><h4>Format long — La Malice</h4><div class="meta">~70 min</div></div>
+        <div class="slot"><div class="time">20:00</div><div class="meta">Pause</div></div>
+        <div class="slot highlight"><div class="time">20:30</div><h4>Match — Malice vs Équipe de France</h4><div class="meta">~75 min</div></div>
+        <div class="slot"><div class="time">23:00+</div><div class="meta"><strong>Soirée musicale festive</strong></div></div>
+      </div>
+
+      <!-- Dimanche -->
+      <div class="day card">
+        <h3>Dimanche 17 mai</h3>
+        <div class="slot"><div class="time">09:30</div><div class="meta">Accueil des participants aux stages</div></div>
+        <div class="slot"><div class="time">10:00–13:00</div><div class="meta">Stages du matin — <strong>2 salles</strong></div></div>
+        <div class="slot"><div class="time">14:00–17:00</div><div class="meta">Stages de l’après-midi — <strong>2 salles</strong></div></div>
+        <div class="slot"><div class="time">18:30</div><div class="meta">Ambiance musicale · Installation du public</div></div>
+        <div class="slot"><div class="time">19:00</div><h4>Format long — La Malice</h4><div class="meta">~70 min</div></div>
+        <div class="slot"><div class="time">20:00</div><div class="meta">Pause</div></div>
+        <div class="slot highlight"><div class="time">20:30</div><h4>Match — Malice vs Belgique</h4><div class="meta">~75 min</div></div>
+        <div class="slot"><div class="time">23:00</div><div class="meta">Fermeture</div></div>
+      </div>
+    </div>
+
+    <!-- Tarifs -->
+    <div class="pricing" style="margin-top:18px">
+      <div class="price"><h4>Pass 1 jour</h4><div class="value">25 €</div><p class="small">2 spectacles + 1 boisson incluse</p></div>
+      <div class="price"><h4>Pass 3 jours</h4><div class="value">60 €</div><p class="small">Accès aux 3 soirées</p></div>
+      <div class="price"><h4>Réductions</h4><div class="value">-40%</div><p class="small">Étudiant·e·s & demandeur·se·s d’emploi</p></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="grid grid-2">
+        <div><h3>Billetterie</h3><p>Ouverture bientôt sur HelloAsso. Laissez votre e-mail pour être prévenu·e.</p></div>
+        <div style="align-self:center"><button class="btn btn-primary" data-open="notify">Prévenez-moi</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ateliers -->
+<section id="ateliers" class="section">
+  <div class="container">
+    <h2>Ateliers d’impro</h2>
+    <p class="small">
+      <strong>Horaires :</strong> 10:00–13:00 et 14:00–17:00 · <strong>Accueil à 09:30</strong><br>
+      <strong>Salles :</strong> 2 salles dédiées aux stages · <strong>Capacité :</strong> jusqu’à 12 créneaux sur 3 jours<br>
+      Tarif indicatif : <strong>30 €</strong> / <strong>3 h</strong> / <strong>≈ 15 places</strong> par atelier.
+    </p>
+
+    <!-- DESIGNER : mini schéma planning (optionnel)
+         - 1200x450
+         - 3 colonnes (ven/sam/dim), 2 lignes (matin/après-midi), 2 badges “salle A/B”
+         - Style : illustration schématique, aplats charte -->
+    <div class="card" style="margin-top:10px">
+      <img src="festival-2026/ateliers/planning-1200x450.png" alt="Planning des ateliers : matin et après-midi, deux salles." width="1200" height="450">
+    </div>
+
+    <div class="grid grid-3" style="margin-top:16px">
+      <!-- Atelier 1 -->
+      <!-- DESIGNER : portrait formateur (cercle)
+           - Photo réaliste
+           - 600x600 (affiché en 64x64)
+           - Chemin : festival-2026/ateliers/instructor-1-600x600.jpg -->
+      <article class="card">
+        <h3><!-- TODO: Titre atelier --></h3>
+        <p><!-- TODO: Bénéfice clair (1–2 phrases) --></p>
+        <p class="small">Niveau : <!-- TODO --> · Durée : 3 h · Places : ≈ 15</p>
+        <div class="small" style="display:flex;align-items:center;gap:10px">
+          <img src="festival-2026/ateliers/instructor-1-600x600.jpg" alt="Portrait formateur 1" width="64" height="64" style="border-radius:50%;object-fit:cover;aspect-ratio:1/1">
+          <span><strong><!-- TODO: Nom --></strong> — <!-- TODO: micro bio --></span>
+        </div>
+        <div class="cta-row" style="margin-top:10px"><a class="btn btn-secondary" href="#" aria-disabled="true">Bientôt en ligne</a></div>
+      </article>
+
+      <!-- Atelier 2 -->
+      <!-- DESIGNER : idem atelier 1 -->
+      <article class="card">
+        <h3><!-- TODO --></h3>
+        <p><!-- TODO --></p>
+        <p class="small">Niveau : <!-- --> · Durée : 3 h · Places : ≈ 15</p>
+        <div class="small" style="display:flex;align-items:center;gap:10px">
+          <img src="festival-2026/ateliers/instructor-2-600x600.jpg" alt="Portrait formateur 2" width="64" height="64" style="border-radius:50%;object-fit:cover;aspect-ratio:1/1">
+          <span><strong><!-- --></strong> — <!-- --></span>
+        </div>
+        <div class="cta-row" style="margin-top:10px"><a class="btn btn-secondary" href="#" aria-disabled="true">Bientôt en ligne</a></div>
+      </article>
+
+      <!-- Atelier 3 -->
+      <!-- DESIGNER : idem atelier 1 -->
+      <article class="card">
+        <h3><!-- TODO --></h3>
+        <p><!-- TODO --></p>
+        <p class="small">Niveau : <!-- --> · Durée : 3 h · Places : ≈ 15</p>
+        <div class="small" style="display:flex;align-items:center;gap:10px">
+          <img src="festival-2026/ateliers/instructor-3-600x600.jpg" alt="Portrait formateur 3" width="64" height="64" style="border-radius:50%;object-fit:cover;aspect-ratio:1/1">
+          <span><strong><!-- --></strong> — <!-- --></span>
+        </div>
+        <div class="cta-row" style="margin-top:10px"><a class="btn btn-secondary" href="#" aria-disabled="true">Bientôt en ligne</a></div>
+      </article>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="grid grid-2">
+        <div><h3>Proposer un atelier</h3><p>Vous souhaitez animer un atelier pendant le festival ? Envoyez-nous votre proposition (titre, bénéfice, niveau, prérequis, durée, places, bio courte).</p></div>
+        <div style="align-self:center"><a class="btn btn-primary" href="#"><!-- TODO: lien formulaire -->Soumettre ma proposition</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Infos pratiques -->
+<section id="infos" class="section">
+  <div class="container grid grid-2">
+    <div>
+      <h2>Infos pratiques</h2>
+      <p class="small"><strong>Lieu :</strong> Patinoire de la Barre, Anglet</p>
+      <ul>
+        <li>Snacks & boissons sur place.</li>
+        <li>Zone détente pour prolonger la soirée.</li>
+        <li>Accès / parkings / transports : <em>à venir</em>.</li>
+        <li>Accessibilité : <em>à venir</em>.</li>
+      </ul>
+      <p><a href="https://maps.google.com/?q=Patinoire%20de%20la%20Barre%20Anglet" target="_blank" rel="noopener">Voir sur Google Maps</a></p>
+    </div>
+
+    <div class="card">
+      <h3>FAQ</h3>
+      <details><summary>Quand la billetterie ouvre-t-elle ?</summary><p>Bientôt — laissez votre e-mail et nous vous préviendrons.</p></details>
+      <details><summary>Des tarifs réduits ?</summary><p>Oui : -40% pour étudiant·e·s et demandeur·se·s d’emploi (justificatif requis).</p></details>
+      <details><summary>La soirée festive est-elle incluse ?</summary><p>Oui, elle suit les spectacles du samedi.</p></details>
+      <details><summary>Restauration sur place ?</summary><p>Oui, un espace snacks & boissons est prévu.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Sponsors -->
+<section id="sponsors" class="section">
+  <div class="container">
+    <h2>Partenaires & sponsors</h2>
+    <p class="small">Merci à nos partenaires. Vous souhaitez nous soutenir ? <a href="#"><!-- TODO: lien -->Devenir sponsor</a>.</p>
+
+    <!-- DESIGNER : logos sponsors (SVG ou PNG transparent)
+         - Orientation horizontale si possible
+         - Taille cible 200x80 (hauteur max 80px dans le ruban)
+         - Versions monochromes acceptées si plus harmonieuses -->
+    <div class="sponsors-list" style="margin-top:14px">
+      <img class="sponsor" src="festival-2026/logos/ville-anglet.svg" alt="Ville d’Anglet">
+      <img class="sponsor" src="festival-2026/logos/aperock-cafe.svg" alt="Aperock Café">
+      <img class="sponsor" src="festival-2026/logos/rtl2.svg" alt="RTL2">
+      <img class="sponsor" src="festival-2026/logos/sponsor-4.svg" alt="Votre logo">
+      <img class="sponsor" src="festival-2026/logos/sponsor-5.svg" alt="Votre logo">
+      <img class="sponsor" src="festival-2026/logos/sponsor-6.svg" alt="Votre logo">
+    </div>
+  </div>
+</section>
+
+<!-- Bloc capture e-mail -->
+<section class="section" style="padding-top:0">
+  <div class="container card">
+    <div class="grid grid-2">
+      <div><h3>Soyez les premiers informés</h3><p>Inscrivez-vous pour recevoir un e-mail dès l’ouverture de la billetterie.</p></div>
+      <div style="align-self:center"><button class="btn btn-primary" data-open="notify">Prévenez-moi</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="section">
+  <div class="container footer-grid">
+    <div>
+      <h3>Festival Impro à la Barre</h3>
+      <p class="small">15–17 mai 2026 · Patinoire de la Barre, Anglet</p>
+      <p class="small">Organisé par <strong>La Malice</strong>.</p>
+      <!-- LOGO LA MALICE
+           - PNG transparent, carré
+           - Largeur affichée : ~140px -->
+      <img src="assets/logo-la-malice-square-bleu-tr.png" alt="Logo La Malice" width="140" height="140" style="margin-top:8px">
+    </div>
+    <div>
+      <h4>Liens</h4>
+      <ul class="small">
+        <li><a href="#valeur">À l’affiche</a></li>
+        <li><a href="#chiffres">Les chiffres</a></li>
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#ateliers">Ateliers</a></li>
+        <li><a href="#infos">Infos pratiques</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p class="small">Email : <!-- TODO: adresse officielle --></p>
+      <p class="small"><a href="#"><!-- TODO -->Devenir sponsor</a></p>
+      <p class="small"><a href="#"><!-- TODO -->Politique de confidentialité</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA mobile -->
+<div class="sticky-cta">
+  <button class="btn btn-primary" data-open="notify">Prévenez-moi</button>
+</div>
+
+<!-- Modal Brevo (placeholder) -->
+<dialog id="notify">
+  <form method="dialog" class="modal-card" id="notifyForm">
+    <h3>Recevoir l’alerte d’ouverture</h3>
+    <p class="small">Laissez votre e-mail pour être prévenu·e dès que la billetterie ouvre.</p>
+    <label for="nf_name">Prénom</label><input id="nf_name" name="first_name" autocomplete="given-name" />
+    <label for="nf_email">E-mail*</label><input id="nf_email" name="email" type="email" required autocomplete="email" />
+    <div class="cta-row" style="margin-top:10px">
+      <button class="btn btn-primary" value="submit">S’inscrire</button>
+      <button class="btn btn-secondary" value="cancel">Fermer</button>
+    </div>
+    <!-- TODO: remplacer par l’iframe ou l’API Brevo -->
+  </form>
+</dialog>
+
+<script>
+  // Révéler le header quand le hero sort du viewport
+  const hero = document.getElementById('hero');
+  const header = document.getElementById('siteHeader');
+  const io = new IntersectionObserver(es=>es.forEach(e=> header.classList.toggle('show', !e.isIntersecting)), {threshold:0.01});
+  io.observe(hero);
+
+  // Burger / drawer mobile
+  const burger=document.getElementById('burger'), drawer=document.getElementById('drawer');
+  burger.addEventListener('click',()=>drawer.classList.toggle('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+
+  // Modal open/close
+  const dlg=document.getElementById('notify');
+  document.querySelectorAll('[data-open="notify"]').forEach(b=>b.addEventListener('click',()=>dlg.showModal()));
+  dlg.addEventListener('click',e=>{
+    const r=dlg.querySelector('.modal-card').getBoundingClientRect();
+    const inside=r.top<=e.clientY && e.clientY<=r.bottom && r.left<=e.clientX && e.clientX<=r.right;
+    if(!inside) dlg.close();
+  });
+
+  // Placeholder submit (remplacer par Brevo)
+  document.getElementById('notifyForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    alert("Merci ! Vous serez prévenu·e dès l’ouverture de la billetterie. (Brancher Brevo ici)");
+    dlg.close();
+  },{once:true});
+</script>
+</body>
+</html>
