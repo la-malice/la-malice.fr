@@ -8,25 +8,40 @@
       body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; }
       .wrap { min-height: 100dvh; display: grid; place-items: center; padding: 24px; background: #0f172a; color: #e2e8f0; }
       .card { max-width: 720px; width: 100%; background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+      .logo { max-width: 200px; height: auto; margin: 0 auto 24px; display: block; }
       h1 { margin: 0 0 12px; font-size: 28px; line-height: 1.2; color: #f8fafc; }
+      .intro { margin: 0 0 24px; color: #cbd5e1; line-height: 1.6; }
       p { margin: 0 0 20px; color: #cbd5e1; }
       .links { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-      a.button { display: inline-block; text-align: center; padding: 12px 16px; border-radius: 10px; text-decoration: none; font-weight: 600; }
+      a.button { display: inline-block; text-align: center; padding: 12px 16px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+      a.button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
       a.primary { background: #22c55e; color: #052e16; }
       a.secondary { background: #e2e8f0; color: #0f172a; }
-      small { display: block; margin-top: 16px; color: #94a3b8; }
+      a.button.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
+      a.button.facebook { background: #1877F2; color: #fff; }
+      a.button.helloasso { background: #00B04F; color: #fff; }
+      small { display: block; margin-top: 16px; color: #94a3b8; text-align: center; }
     </style>
   </head>
   <body>
     <div class="wrap">
       <div class="card">
-        <h1>La Malice</h1>
-        <p>Page d'accueil temporaire. Retrouvez nos contenus ci-dessous&nbsp;:</p>
-        <div class="links">
-          <a class="button primary" href="festival-impro-malice-2026.html">Festival Impro Malice 2026</a>
-          <a class="button secondary" href="https://selections.la-malice.fr" rel="noopener">App Sélection des équipes</a>
+        <img src="assets/img/logo-la-malice-noir-bleu-tr.png" alt="Logo La Malice" class="logo">
+        <p style="text-align: center; font-size: 1.1rem; font-weight: 600; color: #f8fafc; margin: 0 0 24px;">Nous sommes la <strong>MALICE</strong>, le <strong>M</strong>ouvement <strong>A</strong>rtistique et <strong>L</strong>udique d'<strong>I</strong>mprovisation <strong>C</strong>arrément <strong>E</strong>ffervescent!</p>
+        <div class="intro">
+          <p>La Malice est une troupe de théâtre d'improvisation amateur qui propose des spectacles sur la côte basque et au delà depuis 2016.</p>
+          <p>Nous recevons plusieurs fois par an d'autres troupes pour organiser les fameux matches d'impros qui rassemblent des centaines de spectateurs. Mais nous proposons également d'autres formats comme des cabarets qui rencontrent également un franc succès!</p>
+          <p>Humour, énergie et un grain de folie sont les ingrédients de la recette de la Malice qui fait mouche à chaque fois. Venez-nous voir, vous ne le regretterez pas!</p>
         </div>
-        <small>Cet écran est temporaire pendant la mise en place du site.</small>
+        <p>Retrouvez nos contenus ci-dessous&nbsp;:</p>
+        <div class="links">
+          <a class="button instagram" href="https://www.instagram.com/lamaliceimprovise/" rel="noopener">Instagram</a>
+          <a class="button facebook" href="https://facebook.com/lamaliceimprovise" rel="noopener">Facebook</a>
+          <a class="button helloasso" href="https://www.helloasso.com/associations/arteateou" rel="noopener">HelloAsso</a>
+          <a class="button primary" href="https://festibask-impro.fr" rel="noopener">Festibask'Impro</a>
+          <a class="button secondary" href="https://selections.la-malice.fr" rel="noopener">Compos Spectacles</a>
+        </div>
+        <small>© 2025 Arteateou</small>
       </div>
     </div>
   </body>
