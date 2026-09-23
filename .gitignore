@@ -1,0 +1,23 @@
+# OS and editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Dependencies and generated sites (stack-specific entries can be added after architecture)
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+
+# BMad local/runtime state
+.agents/skills/
+.bmad-loop/
+.codex/hooks.json
+_bmad/render/
+_bmad/config.user.toml
+_bmad/custom/*.user.toml
+
+# BMad artefacts are generated locally until a planning step intentionally versions a source document.
+_bmad-output/
