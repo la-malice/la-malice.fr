@@ -9,3 +9,4 @@
 [core]
 project_name = "la-malice.fr"
 document_output_language = "French"
+communication_language = "French"
