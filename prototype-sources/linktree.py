@@ -6,6 +6,7 @@ import sys
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 URL = 'https://linktr.ee/lamaliceimprovise'
@@ -54,5 +55,7 @@ if __name__ == '__main__':
         events = fetch()
         Path(sys.argv[1]).write_text(json.dumps(events, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         print(f'{len(events)} lien(s) de spectacle repéré(s) ; vérifier les intitulés.')
+    except HTTPError as exc:
+        sys.exit(f'Collecte Linktree impossible : HTTP {exc.code}')
     except Exception as exc:
         sys.exit('Collecte Linktree impossible : ' + type(exc).__name__)
