@@ -10,11 +10,34 @@ on:
         description: 'Lecture ponctuelle du Linktree public et extraction IA'
         type: boolean
         default: false
+      tester_navigateur:
+        description: 'Diagnostic ponctuel Instagram et Linktree sans authentification'
+        type: boolean
+        default: false
   schedule:
     - cron: '17 6,14,22 * * *'
 permissions:
   contents: read
 jobs:
+  diagnostic-navigateur:
+    if: github.event_name == 'workflow_dispatch' && inputs.tester_navigateur
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lire le profil Instagram public avec Chrome
+        run: |
+          mkdir -p diagnostic
+          python3 prototype-sources/diagnostic_navigateur.py diagnostic/instagram.json
+      - name: Diagnostiquer la réponse HTTP Linktree
+        if: always()
+        run: |
+          mkdir -p diagnostic
+          python3 prototype-sources/diagnostic_linktree.py diagnostic/linktree.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: diagnostic-sources-publics
+          path: diagnostic/
   simulation:
     runs-on: ubuntu-latest
     steps:
