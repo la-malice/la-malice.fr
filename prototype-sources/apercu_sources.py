@@ -75,12 +75,11 @@ def render(data, template, output):
         aspect-ratio: 1; object-fit: cover; border-radius: .6rem; }
       .event-heading h3 { margin-top: .25rem; overflow-wrap: anywhere; }
       .event-heading .event-date { letter-spacing: .035em; }
-      .event-actions { display: flex; align-items: flex-start; gap: .85rem; width: 100%; }
-      .event-actions .button { flex: none; margin-top: 0; }
-      .event-details { flex: 1; min-width: 0; padding-top: .55rem; }
-      .event-details summary { cursor: pointer; color: #9bdcff; font-size: .9rem; text-decoration: underline; }
-      .event-details[open] summary { margin-bottom: .65rem; }
-      .event-description { white-space: pre-line; }
+      .event-actions { display: flow-root; width: 100%; }
+      .event-actions .button { float: left; margin: 0 .85rem 0 0; }
+      .event-details summary { overflow: hidden; width: fit-content; padding: .55rem 0; cursor: pointer;
+        color: #9bdcff; font-size: .9rem; text-decoration: underline; }
+      .event-details .event-description { clear: both; padding-top: .65rem; white-space: pre-line; }
     </style></head>""", 1)
     esc = html.escape
     events, posts, extracted = [], [], []
