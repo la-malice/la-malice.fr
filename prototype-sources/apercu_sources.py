@@ -41,9 +41,14 @@ def render(data, template, output):
         if url.scheme != 'https' or not url.hostname or url.username is not None:
             raise ValueError('Lien de réservation invalide')
         card = synthesize(json.dumps({'linktree': event['titre'], 'billetterie': event.get('billetterie')}, ensure_ascii=False))
+        detail = card['detail'] or ''
+        if not event.get('billetterie'):
+            parts = event['titre'].split(' - ', 2)
+            if len(parts) == 3 and parts[1].strip():
+                detail = parts[1].strip().title()
         events.append(f'<article class="panel event"><p class="event-date">{esc(card["date_affichee"] or "")}</p>'
                       f'<h3>{esc(card["titre"] or event["titre"])}</h3>'
-                      f'<p>{esc(card["detail"] or "")}</p>'
+                      f'<p>{esc(detail)}</p>'
                       f'<a class="button" href="{esc(event["url"])}">Réserver</a></article>')
     for post in data['instagram'][:3]:
         if isinstance(post, str):
