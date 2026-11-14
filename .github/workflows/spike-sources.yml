@@ -1,0 +1,42 @@
+name: Spike sources (simulation)
+on:
+  workflow_dispatch:
+    inputs:
+      tester_ia:
+        description: 'Essai API payant sur fixture locale'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 6,14,22 * * *'
+permissions:
+  contents: read
+jobs:
+  simulation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Générer la démonstration
+        run: |
+          python3 prototype-sources/demo.py resultat
+          python3 -m unittest discover -s prototype-sources -p 'test_*.py'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spike-sources-simulees
+          path: resultat/
+  essai-ia:
+    if: github.event_name == 'workflow_dispatch' && inputs.tester_ia
+    environment: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Essai IA facultatif sur fixture
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: |
+          mkdir -p resultat-ia
+          python3 prototype-sources/ia_spectacles.py prototype-sources/fixtures/spectacles.json resultat-ia/spectacles-ia.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spike-extraction-ia
+          path: resultat-ia/
