@@ -98,6 +98,9 @@ def render(data, template, output):
             "Extrais un titre court qui conserve les noms des équipes. "
             "La date suit AAAA-MM-JJ, ou --MM-JJ si l’année est inconnue. "
             "L’heure suit HH:MM et indique le début du spectacle. "
+            "Le champ format contient le type de spectacle. "
+            "Si l’intitulé indique « format long », écris « Format long ». "
+            "Si les sources indiquent un match d’improvisation, écris « Match d’improvisation ». "
             "Utilise null pour tout champ inconnu.")
         if confirmation:
             card.update(date=confirmation['date'], heure=confirmation['heure'])
