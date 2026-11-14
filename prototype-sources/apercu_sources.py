@@ -105,7 +105,7 @@ def render(data, template, output):
             "La date suit AAAA-MM-JJ, ou --MM-JJ si l’année est inconnue. "
             "L’heure suit HH:MM et indique le début du spectacle. "
             "Le champ format contient le type de spectacle. "
-            "Si l’intitulé indique « format long », écris « Format long ». "
+            "Si l’intitulé indique « format long », écris « Impro longue ». "
             "Si les sources indiquent un match d’improvisation, écris « Match d’improvisation ». "
             "Utilise null pour tout champ inconnu.")
         if confirmation:
@@ -114,7 +114,7 @@ def render(data, template, output):
         if re.search(r"\bmatch d[’']improvisation\b", description, re.I):
             card['format'] = 'Match d’improvisation'
         elif re.search(r'\bformat long\b', event['titre'], re.I):
-            card['format'] = 'Format long'
+            card['format'] = 'Impro longue'
         extracted.append({**card, 'url': booking_url or None, 'description': description,
                           'affiche_instagram': confirmation['url'] if confirmation else None})
         place = ', '.join(filter(None, (card['salle'], card['ville'])))
