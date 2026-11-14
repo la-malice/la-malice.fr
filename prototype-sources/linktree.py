@@ -2,17 +2,15 @@
 """Essai ponctuel du profil public ; sortie réservée au spike, pas au site."""
 import base64
 import json
-import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 URL = 'https://linktr.ee/lamaliceimprovise'
 MAX_BYTES = 2_000_000
-DATE_PREFIX = re.compile(r'^\s*\d{1,2}\s+(?:janv|fév|fev|mars|avr|mai|juin|juil|août|aout|sept|oct|nov|déc|dec)', re.I)
 
 class Links(HTMLParser):
     def __init__(self):
@@ -44,16 +42,14 @@ def parse(text):
         raise ValueError('aucun bouton reconnu : structure ou réponse inattendue')
     page = json.loads(''.join(parser.page_data)) if parser.page_data else {}
     links = page.get('props', {}).get('pageProps', {}).get('links', [])
-    metadata = {(link.get('title'), link.get('url')): link for link in links}
+    metadata = {link.get('url'): link for link in links}
     events = []
     for title, url in parser.buttons:
-        if not DATE_PREFIX.match(title):
-            continue
         parsed = urlsplit(url)
         if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password:
-            raise ValueError('lien de spectacle invalide')
+            continue
         event = {'titre': title, 'url': url}
-        link = metadata.get((title, url), {})
+        link = metadata.get(url, {})
         preview = link.get('metaData') or {}
         for field, value in (
             ('titre_partage', preview.get('ogTitle') or preview.get('title')),
@@ -95,14 +91,17 @@ def fetch(*, include_images=False):
     for event in events:
         source = event.pop('miniature_source', None)
         if include_images and source:
-            event['image'] = thumbnail(source)
+            try:
+                event['image'] = thumbnail(source)
+            except (URLError, TimeoutError, ValueError) as exc:
+                print(f'Vignette Linktree indisponible : {type(exc).__name__}', file=sys.stderr)
     return events
 
 if __name__ == '__main__':
     try:
         events = fetch()
         Path(sys.argv[1]).write_text(json.dumps(events, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-        print(f'{len(events)} lien(s) de spectacle repéré(s) ; vérifier les intitulés.')
+        print(f'{len(events)} lien(s) Linktree collecté(s).')
     except HTTPError as exc:
         sys.exit(f'Collecte Linktree impossible : HTTP {exc.code}')
     except Exception as exc:
