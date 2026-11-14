@@ -75,7 +75,9 @@ def render(data, template, output):
         aspect-ratio: 1; object-fit: cover; border-radius: .6rem; }
       .event-heading h3 { margin-top: .25rem; overflow-wrap: anywhere; }
       .event-heading .event-date { letter-spacing: .035em; }
-      .event-details { width: 100%; }
+      .event-actions { display: flex; align-items: flex-start; gap: .85rem; width: 100%; }
+      .event-actions .button { flex: none; margin-top: 0; }
+      .event-details { flex: 1; min-width: 0; padding-top: .55rem; }
       .event-details summary { cursor: pointer; color: #9bdcff; font-size: .9rem; text-decoration: underline; }
       .event-details[open] summary { margin-bottom: .65rem; }
       .event-description { white-space: pre-line; }
@@ -108,6 +110,11 @@ def render(data, template, output):
             "Utilise null pour tout champ inconnu.")
         if confirmation:
             card.update(date=confirmation['date'], heure=confirmation['heure'])
+        # Conserve les types explicitement indiqués dans les sources.
+        if re.search(r"\bmatch d[’']improvisation\b", description, re.I):
+            card['format'] = 'Match d’improvisation'
+        elif re.search(r'\bformat long\b', event['titre'], re.I):
+            card['format'] = 'Format long'
         extracted.append({**card, 'url': booking_url or None, 'description': description,
                           'affiche_instagram': confirmation['url'] if confirmation else None})
         place = ', '.join(filter(None, (card['salle'], card['ville'])))
@@ -121,10 +128,11 @@ def render(data, template, output):
             f'<p class="event-description">{esc(description)}</p></details>'
             if description else ''
         )
+        actions = f'<div class="event-actions">{booking}{details}</div>' if booking or details else ''
         events.append(f'<article class="panel event"><div class="event-heading">{thumbnail}<div><p class="event-date">{esc(date_label)}</p>'
                       f'<h3>{esc(card["titre"] or event["titre"])}</h3></div></div>'
                       f'<p class="event-place">{esc(detail)}</p>'
-                      f'{booking}{details}</article>')
+                      f'{actions}</article>')
     for post in data['instagram'][:3]:
         if isinstance(post, str):
             continue
