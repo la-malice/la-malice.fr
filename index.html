@@ -1,50 +1,157 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>La Malice</title>
-    <style>
-      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; }
-      .wrap { min-height: 100dvh; display: grid; place-items: center; padding: 24px; background: #0f172a; color: #e2e8f0; }
-      .card { max-width: 720px; width: 100%; background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-      .logo { max-width: 200px; height: auto; margin: 0 auto 24px; display: block; }
-      h1 { margin: 0 0 12px; font-size: 28px; line-height: 1.2; color: #f8fafc; }
-      .intro { margin: 0 0 24px; color: #cbd5e1; line-height: 1.6; }
-      p { margin: 0 0 20px; color: #cbd5e1; }
-      .links { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-      a.button { display: inline-block; text-align: center; padding: 12px 16px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
-      a.button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-      a.primary { background: #22c55e; color: #052e16; }
-      a.secondary { background: #e2e8f0; color: #0f172a; }
-      a.button.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
-      a.button.facebook { background: #1877F2; color: #fff; }
-      a.button.helloasso { background: #00B04F; color: #fff; }
-      small { display: block; margin-top: 16px; color: #94a3b8; text-align: center; }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <div class="card">
-        <img src="assets/img/logo-la-malice-noir-bleu-tr.png" alt="Logo La Malice" class="logo">
-        <p style="text-align: center; font-size: 1.1rem; font-weight: 600; color: #f8fafc; margin: 0 0 24px;">Nous sommes la <strong>MALICE</strong>, le <strong>M</strong>ouvement <strong>A</strong>rtistique et <strong>L</strong>udique d'<strong>I</strong>mprovisation <strong>C</strong>arrément <strong>E</strong>ffervescent!</p>
-        <div class="intro">
-          <p>La Malice est une troupe de théâtre d'improvisation amateur qui propose des spectacles sur la côte basque et au delà depuis 2016.</p>
-          <p>Nous recevons plusieurs fois par an d'autres troupes pour organiser les fameux matches d'impros qui rassemblent des centaines de spectateurs. Mais nous proposons également d'autres formats comme des cabarets qui rencontrent également un franc succès!</p>
-          <p>Humour, énergie et un grain de folie sont les ingrédients de la recette de la Malice qui fait mouche à chaque fois. Venez-nous voir, vous ne le regretterez pas!</p>
-        </div>
-        <p>Retrouvez nos contenus ci-dessous&nbsp;:</p>
-        <div class="links">
-          <a class="button instagram" href="https://www.instagram.com/lamaliceimprovise/" rel="noopener">Instagram</a>
-          <a class="button facebook" href="https://facebook.com/lamaliceimprovise" rel="noopener">Facebook</a>
-          <a class="button helloasso" href="https://www.helloasso.com/associations/arteateou" rel="noopener">HelloAsso</a>
-          <a class="button primary" href="https://festibask-impro.fr" rel="noopener">Festibask'Impro</a>
-          <a class="button secondary" href="https://selections.la-malice.fr" rel="noopener">Compos Spectacles</a>
-        </div>
-        <small>© 2025 Arteateou</small>
-      </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="La Malice, troupe de théâtre d'improvisation amateur sur la côte basque et au-delà.">
+  <title>La Malice — théâtre d’improvisation</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #081426; color: #f2f7ff; scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.6; }
+    a { color: #a9e2ff; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #ffe38d; outline-offset: 4px; }
+    .skip { position: absolute; top: -5rem; left: 1rem; padding: .7rem; background: #fff; color: #081426; z-index: 2; }
+    .skip:focus { top: 1rem; }
+    .container { width: min(1100px, calc(100% - 2.5rem)); margin: auto; }
+    header { border-bottom: 1px solid #35516d; background: #0b1b30; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; padding-block: 1rem; }
+    .brand { display: inline-flex; align-items: center; gap: .55rem; color: #fff; text-decoration: none; font-size: .9rem; font-weight: 800; letter-spacing: .08em; }
+    nav ul { display: flex; flex-wrap: wrap; gap: .5rem 1.3rem; padding: 0; margin: 0; list-style: none; }
+    nav a { display: inline-flex; align-items: center; min-height: 44px; color: #e6f4ff; text-decoration: none; font-weight: 600; }
+    nav a:hover { text-decoration: underline; }
+    .brand-logo { display: block; width: 100px; height: auto; filter: drop-shadow(0 0 1px #d4e8f8); }
+    .hero-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); align-items: center; gap: 2.5rem; }
+    .hero { padding: clamp(4rem, 10vw, 8rem) 0; background: radial-gradient(ellipse at 85% 15%, #164775, transparent 55%), #0b1b30; }
+    .eyebrow { color: #9bdcff; font-size: .8rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3 { line-height: 1.12; }
+    h1 { font-size: clamp(2.8rem, 8vw, 6rem); max-width: 12ch; margin: .3em 0; letter-spacing: -.04em; }
+    .lead { max-width: 48rem; font-size: clamp(1.15rem, 2vw, 1.45rem); color: #d4e8f8; }
+    .button { display: inline-block; padding: .8rem 1.2rem; border-radius: .5rem; background: #a9e2ff; color: #081426; font-weight: 750; text-decoration: none; }
+    .button:hover { background: #dcf3ff; }
+    section { padding: clamp(3rem, 7vw, 6rem) 0; scroll-margin-top: 1rem; }
+    section:nth-child(even) { background: #10243b; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin: .3em 0 .7em; letter-spacing: -.03em; }
+    h3 { font-size: 1.35rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1.5rem; }
+    .copy { max-width: 46rem; color: #d4e2ef; }
+    .panel { border: 1px solid #49647d; border-radius: .8rem; padding: 1.5rem; background: #112b46; }
+    .panel p:last-child { margin-bottom: 0; }
+    .events { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
+    .event { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
+    .event h3, .event p { margin: 0; }
+    .event-date { color: #9bdcff; font-size: .85rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .event-place { color: #d4e2ef; }
+    .event .button { margin-top: auto; }
+    .hero-photo { display: block; width: 100%; max-width: 32rem; height: auto; justify-self: end; border-radius: .9rem; box-shadow: 0 16px 38px #0005; }
+    .links { display: flex; flex-wrap: wrap; gap: .7rem 1.4rem; padding: 0; list-style: none; }
+    footer { border-top: 1px solid #35516d; padding: 2rem 0; color: #c2d5e5; }
+    .posts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+    .post { overflow: hidden; padding: 0; }
+    .post-link { display: block; height: 100%; color: inherit; text-decoration: none; }
+    .post-link:hover .post-content h3 { text-decoration: underline; text-underline-offset: .2em; }
+    .post-link:focus-visible { outline-offset: -4px; }
+    .post-content h3::after { content: " ↗"; color: #a9e2ff; }
+    .instagram-more { margin: 1.75rem 0 0; font-weight: 700; }
+    .post-media { position: relative; overflow: hidden; isolation: isolate; background: #10243b; }
+    .post-media::before { content: ""; position: absolute; inset: 0; background: #10243b var(--post-background, linear-gradient(135deg, #164775, #172c4b)) center / cover no-repeat; filter: blur(18px) brightness(.55); transform: scale(1.12); }
+    .post img { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: contain; color: #f2f7ff; }
+    .post-content { padding: 1.2rem; }
+    .post-content h3 { margin: 0 0 .5rem; }
+    .post-content p { margin: .5rem 0; }
+    .copy p + p { margin-top: 1.5rem; }
+    .mobile-menu { display: none; }
+    @media (max-width: 600px) { .header-inner { flex-wrap: nowrap; gap: 1rem; padding-block: .5rem; } .brand-logo { width: 54px; } .desktop-nav { display: none; } .mobile-menu { display: block; position: relative; } .mobile-menu summary { display: flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; padding: .4rem .8rem; color: #f2f7ff; border: 1px solid #7291aa; border-radius: .5rem; font-weight: 700; cursor: pointer; list-style: none; } .mobile-menu summary::-webkit-details-marker { display: none; } .mobile-menu summary::before { content: "☰"; font-size: 1.15rem; } .mobile-menu[open] summary::before { content: "×"; font-size: 1.5rem; line-height: 1; } .mobile-menu nav { position: absolute; right: 0; top: calc(100% + .5rem); z-index: 5; min-width: 12rem; padding: .5rem; border: 1px solid #49647d; border-radius: .7rem; background: #10243b; box-shadow: 0 12px 30px #0008; } .mobile-menu nav ul { display: block; } .mobile-menu nav a { display: flex; padding-inline: .75rem; border-radius: .35rem; } .mobile-menu nav a:hover { background: #1b3a58; } .hero { padding: 3rem 0; } .hero-layout { gap: 1.5rem; } .hero-photo { justify-self: start; } section { padding: 3rem 0; } }
+    @media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <header><div class="container header-inner">
+    <a class="brand" href="#accueil"><img class="brand-logo" src="assets/img/logo-la-malice-noir-bleu-tr.png" alt=""><span>LA MALICE</span></a>
+    <nav class="desktop-nav" aria-label="Navigation principale"><ul><li><a href="#dates">Dates</a></li><li><a href="#actualites">Actualités</a></li><li><a href="#presentation">La troupe</a></li><li><a href="#contact">Contact &amp; liens</a></li></ul></nav>
+    <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Navigation mobile"><ul><li><a href="#dates">Dates</a></li><li><a href="#actualites">Actualités</a></li><li><a href="#presentation">La troupe</a></li><li><a href="#contact">Contact &amp; liens</a></li></ul></nav></details>
+  </div></header>
+  <main id="contenu">
+    <section class="hero" id="accueil"><div class="container hero-layout"><div>
+      <p class="eyebrow">Théâtre d’improvisation</p>
+      <h1>La Malice entre en scène.</h1>
+      <p class="lead">Mouvement Artistique et Ludique d’Improvisation Carrément Effervescent !</p>
+      <p>Une troupe de théâtre d’improvisation amateur sur la côte basque et au-delà depuis 2016.</p>
+      <a class="button" href="#dates">Voir les dates</a>
     </div>
-  </body>
+    <!-- MÉDIAS : photo provisoire fournie pour essai ; sélection, droits et crédit à confirmer avant publication. -->
+    <img class="hero-photo" src="assets/img/accueil-essai.webp" width="1200" height="900" alt="Des membres de La Malice en jeu sur scène." fetchpriority="high">
+    </div></section>
+    <section id="dates"><div class="container"><p class="eyebrow">Sur scène</p><h2>Les prochaines dates</h2>
+      <!-- DATES : source unique, mise à jour manuelle. Voir docs/gestion-premiere-page.md. -->
+      <div class="events">
+        <article class="panel event">
+          <p class="event-date"><time datetime="2026-11-20">Vendredi 20 novembre 2026</time></p>
+          <h3>Retrouvailles</h3>
+          <p class="event-place">Format long · Le Microphone, Tarnos</p>
+          <p>Horaire à consulter sur la billetterie.</p>
+          <a class="button" href="https://reservation.seignanx.com/spectacle-improvisation-theatrale-retrouvailles-par-la-malice.html" aria-label="Réserver pour Retrouvailles à Tarnos">Réserver</a>
+        </article>
+        <article class="panel event">
+          <p class="event-date"><time datetime="2026-12-12T20:30">Samedi 12 décembre 2026 · 20 h 30</time></p>
+          <h3>La Malice vs la BIM</h3>
+          <p class="event-place">Match d’improvisation · Salle AIEC, Cambo-les-Bains</p>
+          <a class="button" href="https://www.helloasso.com/associations/arteateou/evenements/match-cambo-12-decembre-26" aria-label="Réserver pour le match La Malice contre la BIM à Cambo-les-Bains">Réserver</a>
+        </article>
+      </div>
+    </div></section>
+    <section id="actualites"><div class="container"><p class="eyebrow">En coulisses</p><h2>Les actualités</h2>
+      <!-- ACTUALITÉS : source unique, cartes dans leur ordre d’affichage. Voir docs/gestion-premiere-page.md. Sélection et droits à confirmer avant publication. -->
+      <div class="posts">
+        <article class="panel post">
+          <a class="post-link" href="https://www.instagram.com/lamaliceimprovise/reel/DfsDO9gsrDf/" aria-label="Voir la publication Agenda de La Malice sur Instagram">
+            <div class="post-media"><img src="assets/img/instagram/agenda-13-novembre-2026.jpg" alt="Visuel de l’agenda La Malice : Retrouvailles, format long, le 20 novembre à Tarnos ; cabaret le 1er décembre à l’Aperock à Anglet ; match Malice contre BIM le 12 décembre à Cambo-les-Bains."></div>
+            <div class="post-content"><h3>Agenda de La Malice</h3><p>Publication du 13 novembre 2026</p></div>
+          </a>
+        </article>
+        <article class="panel post">
+          <a class="post-link" href="https://www.instagram.com/lamaliceimprovise/reel/DfnMpIospJ0/" aria-label="Voir la publication L’équipe de Retrouvailles sur Instagram">
+            <div class="post-media"><img src="assets/img/instagram/retrouvailles-11-novembre-2026.jpg" alt="Affiche Retrouvailles présentant les portraits de l’équipe du spectacle."></div>
+            <div class="post-content"><h3>L’équipe de Retrouvailles</h3><p>Publication du 11 novembre 2026</p></div>
+          </a>
+        </article>
+        <article class="panel post">
+          <a class="post-link" href="https://www.instagram.com/lamaliceimprovise/p/De3p0M3DF7Y/" aria-label="Voir la publication Retrouvailles sur Instagram">
+            <div class="post-media"><img src="assets/img/instagram/retrouvailles-24-octobre-2026.jpg" alt="Affiche du spectacle Retrouvailles avec deux comédiens sur scène : le 20 novembre à 20 h 15 au Microphone à Tarnos."></div>
+            <div class="post-content"><h3>Retrouvailles</h3><p>Publication du 24 octobre 2026</p></div>
+          </a>
+        </article>
+      </div>
+      <p class="instagram-more"><a href="https://www.instagram.com/lamaliceimprovise/">Voir toutes nos publications sur Instagram <span aria-hidden="true">↗</span></a></p>
+    </div></section>
+    <section id="presentation"><div class="container"><div class="grid">
+      <div><p class="eyebrow">La troupe</p><h2>De l’impro, ensemble.</h2>
+        <div class="copy"><p>La Malice est une troupe de théâtre d'improvisation amateur qui propose des spectacles sur la côte basque et au delà depuis 2016.</p>
+        <p>Nous recevons plusieurs fois par an d'autres troupes pour organiser les fameux matches d'impros qui rassemblent des centaines de spectateurs. Mais nous proposons également d'autres formats comme des cabarets qui rencontrent également un franc succès !</p>
+        <p>Humour, énergie et un grain de folie sont les ingrédients de la recette de la Malice qui fait mouche à chaque fois. Venez-nous voir, vous ne le regretterez pas !</p></div>
+      </div>
+    </div></div></section>
+    <section id="contact"><div class="container"><p class="eyebrow">Restons en lien</p><h2>Retrouvez La Malice</h2><p class="copy">Suivez la troupe et retrouvez nos liens utiles :</p>
+      <ul class="links"><li><a href="https://www.instagram.com/lamaliceimprovise/">Instagram</a></li><li><a href="https://facebook.com/lamaliceimprovise">Facebook</a></li><li><a href="https://www.helloasso.com/associations/arteateou">HelloAsso</a></li><li><a href="https://festibask-impro.fr">Festibask'Impro</a></li><li><a href="https://selections.la-malice.fr">Compos Spectacles</a></li></ul>
+      <!-- CONTACT : coordonnées directes à ajouter après confirmation par l’équipe. -->
+    </div></section>
+  </main>
+  <footer><div class="container">© 2025 Arteateou</div></footer>
+  <script>
+    document.querySelectorAll('.post-media img').forEach((image) => {
+      image.parentElement.style.setProperty('--post-background', `url(${JSON.stringify(image.src)})`);
+    });
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.addEventListener('click', (event) => {
+      if (event.target.closest('a')) mobileMenu.open = false;
+    });
+    mobileMenu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mobileMenu.open) {
+        mobileMenu.open = false;
+        mobileMenu.querySelector('summary').focus();
+      }
+    });
+  </script>
+</body>
 </html>
-
-
