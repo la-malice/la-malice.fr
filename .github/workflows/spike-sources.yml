@@ -2,6 +2,10 @@ name: Spike sources (simulation)
 on:
   workflow_dispatch:
     inputs:
+      apercu_sources:
+        description: Aperçu IA depuis la branche de données
+        type: boolean
+        default: false
       tester_ia:
         description: 'Essai API payant sur fixture locale'
         type: boolean
@@ -10,12 +14,11 @@ on:
         description: 'Lecture ponctuelle du Linktree public et extraction IA'
         type: boolean
         default: false
-  schedule:
-    - cron: '17 6,14,22 * * *'
 permissions:
   contents: read
 jobs:
   simulation:
+    if: "!inputs.apercu_sources"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -55,3 +58,29 @@ jobs:
         with:
           name: spike-extraction-ia
           path: resultat-ia/
+
+  apercu-sources:
+    if: github.event_name == 'workflow_dispatch' && inputs.apercu_sources && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: data/sources-sociales
+          path: donnees-sociales
+          persist-credentials: false
+      - name: Générer la page de prévisualisation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: |
+          mkdir -p apercu
+          cp -R assets apercu/
+          python3 prototype-sources/apercu_sources.py donnees-sociales/sources.json index.html apercu/index.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apercu-sources-sociales
+          path: apercu/
