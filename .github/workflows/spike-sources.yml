@@ -6,6 +6,10 @@ on:
         description: 'Essai API payant sur fixture locale'
         type: boolean
         default: false
+      tester_linktree:
+        description: 'Lecture ponctuelle du Linktree public et extraction IA'
+        type: boolean
+        default: false
   schedule:
     - cron: '17 6,14,22 * * *'
 permissions:
@@ -24,18 +28,29 @@ jobs:
           name: spike-sources-simulees
           path: resultat/
   essai-ia:
-    if: github.event_name == 'workflow_dispatch' && inputs.tester_ia
+    if: github.event_name == 'workflow_dispatch' && (inputs.tester_ia || inputs.tester_linktree)
     environment: github-pages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Préparer les données locales
+        run: mkdir -p resultat-ia
+      - name: Lire le Linktree public une fois
+        if: inputs.tester_linktree
+        run: python3 prototype-sources/linktree.py resultat-ia/linktree-source.json
       - name: Essai IA facultatif sur fixture
+        if: inputs.tester_ia && !inputs.tester_linktree
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
         run: |
-          mkdir -p resultat-ia
           python3 prototype-sources/ia_spectacles.py prototype-sources/fixtures/spectacles.json resultat-ia/spectacles-ia.json
+      - name: Essai IA sur les liens récupérés
+        if: inputs.tester_linktree
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: python3 prototype-sources/ia_spectacles.py resultat-ia/linktree-source.json resultat-ia/spectacles-ia.json
       - uses: actions/upload-artifact@v4
         with:
           name: spike-extraction-ia
