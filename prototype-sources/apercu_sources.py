@@ -83,11 +83,15 @@ def render(data, template, output):
     esc = html.escape
     events, posts, extracted = [], [], []
     for event in data['spectacles'][:6]:
-        url = urlsplit(event['url'])
-        if url.scheme != 'https' or not url.hostname or url.username is not None:
-            raise ValueError('Lien de réservation invalide')
-        description = event.get('description_partage') or ''
-        confirmation = POSTER_CONFIRMATIONS.get(event['url'])
+        booking_url = (event.get('url') or '').strip()
+        booking = ''
+        if booking_url:
+            url = urlsplit(booking_url)
+            if url.scheme != 'https' or not url.hostname or url.username is not None:
+                raise ValueError('Lien de réservation invalide')
+            booking = f'<a class="button" href="{esc(booking_url)}">Réserver</a>'
+        description = (event.get('description_partage') or '').strip()
+        confirmation = POSTER_CONFIRMATIONS.get(booking_url)
         card = synthesize(json.dumps({
             'intitule_linktree': event['titre'],
             'titre_partage': event.get('titre_partage'),
@@ -104,7 +108,7 @@ def render(data, template, output):
             "Utilise null pour tout champ inconnu.")
         if confirmation:
             card.update(date=confirmation['date'], heure=confirmation['heure'])
-        extracted.append({**card, 'url': event['url'], 'description': description,
+        extracted.append({**card, 'url': booking_url or None, 'description': description,
                           'affiche_instagram': confirmation['url'] if confirmation else None})
         place = ', '.join(filter(None, (card['salle'], card['ville'])))
         detail = ' · '.join(filter(None, (card['format'], place)))
@@ -112,19 +116,15 @@ def render(data, template, output):
         thumbnail = (f'<img class="event-thumbnail" src="{validated_image(image)}" alt="" '
                      'width="96" height="96" loading="lazy">') if image else ''
         date_label = format_event_date(card)
-        notes = []
-        if description:
-            notes.append(f'<p class="event-description">{esc(description)}</p>')
-        if confirmation:
-            notes.append(f'<a href="{esc(confirmation["url"])}">Voir l’affiche Instagram</a>')
         details = (
-            f'<details class="event-details"><summary>Détails</summary>{"".join(notes)}</details>'
-            if notes else ''
+            '<details class="event-details"><summary>Détails</summary>'
+            f'<p class="event-description">{esc(description)}</p></details>'
+            if description else ''
         )
         events.append(f'<article class="panel event"><div class="event-heading">{thumbnail}<div><p class="event-date">{esc(date_label)}</p>'
                       f'<h3>{esc(card["titre"] or event["titre"])}</h3></div></div>'
                       f'<p class="event-place">{esc(detail)}</p>'
-                      f'<a class="button" href="{esc(event["url"])}">Réserver</a>{details}</article>')
+                      f'{booking}{details}</article>')
     for post in data['instagram'][:3]:
         if isinstance(post, str):
             continue
