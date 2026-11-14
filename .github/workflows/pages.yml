@@ -3,12 +3,12 @@ name: Deploy static site to Pages
 on:
   push:
     branches: [ "main" ]
+  repository_dispatch:
+    types: [social-sources-changed]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -18,11 +18,28 @@ jobs:
   build:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Charger les données sociales
+        uses: actions/checkout@v4
+        with:
+          ref: data/sources-sociales
+          path: donnees-sociales
+          persist-credentials: false
       - name: Assemble and verify public files
         run: scripts/build-pages.sh "$RUNNER_TEMP/la-malice-pages"
+      - name: Générer les cartes publiques
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: |
+          staging="$(mktemp -d)"
+          python3 prototype-sources/apercu_sources.py donnees-sociales/sources.json index.html "$staging/index.html"
+          cp "$staging/index.html" "$RUNNER_TEMP/la-malice-pages/index.html"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -30,6 +47,9 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: build
+    permissions:
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     environment:
       name: github-pages
