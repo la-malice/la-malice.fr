@@ -50,3 +50,14 @@ Le depot peut rester un site statique, changer de stack ou deleguer une partie d
 - `.agents/skills/`, `.bmad-loop/runs/`, le cache et la politique locale Loop sont generes/localement ignores. Reexecuter l'initialisation sur chaque machine plutot que de les versionner.
 - Ne lancer `bmad-loop run` qu'apres sprint planning, avec un backlog versionne et un checkout propre. Les statuts BMad ne remplacent ni les tests ni une validation humaine.
 - Toute decision de stack, d'hebergement, de donnees personnelles, de dependance payante ou de publication necessite une ADR et la validation appropriee d'Emilie.
+
+<!-- bmad:context -->
+<!-- Vérifié le 2026-11-14 contre de52df0c1ca83d3b70d302cdc18955cfc927e385. Géré par bmad-project-context. -->
+
+## Où intervenir
+
+- Pour la collecte des contenus sociaux, le JSON de données ou le rendu des cartes, lire `docs/collecte-et-apercu.md`.
+- Avant de modifier les balises des cartes `panel event` et `panel post` dans `index.html`, vérifier leur compatibilité avec `prototype-sources/apercu_sources.py`. Le générateur repère ces balises par leur écriture exacte.
+- Pour valider une génération, ouvrir l’artefact HTML et vérifier le rendu des cartes. Un workflow réussi confirme la génération du fichier.
+
+<!-- /bmad:context -->
